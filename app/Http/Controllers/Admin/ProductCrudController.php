@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+//namespace App\Models\Tag;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Tag;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -147,6 +149,15 @@ class ProductCrudController extends CrudController
         ->model(Category::class)  // El modelo que contiene las categorías
         ->attribute('name')  // El atributo del modelo Category que se mostrará en el select
         ->default(1);  // Opcional: establece una categoría por defecto
+
+        //agrega tags
+        CRUD::field('tags')
+        ->type('select2_multiple')
+        ->label('Tags')
+        ->entity('tags')  // Nombre del método en el modelo Product que define la relación
+        ->model(Tag::class)  // El modelo que contiene los tags
+        ->attribute('name')  // El atributo del modelo Tag que se mostrará en el select
+        ->pivot(true);  // Indica que es una relación many-to-many
 
         /**
          * Fields can be defined using the fluent syntax:

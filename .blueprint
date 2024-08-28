@@ -1,0 +1,10 @@
+created:
+    - database/factories/TagFactory.php
+    - database/migrations/2024_08_28_161643_create_tags_table.php
+    - database/migrations/2024_08_28_161644_create_product_tag_table.php
+    - app/Models/Tag.php
+models:
+    Category: { name: 'string:510', image: 'string:510 nullable' }
+    Product: { name: 'string:510', description: 'string:510', image: 'string:510', category_id: biginteger }
+    User: { name: 'string:510', email: 'string:510', email_verified_at: 'datetime nullable', password: 'string:510', remember_token: 'string:200 nullable' }
+    Tag: { id: id, name: string, slug: string, timestamps: timestamps, relationships: { BelongsToMany: \App\Models\Product } }

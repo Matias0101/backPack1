@@ -48,7 +48,7 @@
 				@include('crud::form_content', ['fields' => $crud->fields(), 'action' => 'edit'])
 			@endif
 			{{-- This makes sure that all field assets are loaded. --}}
-			<div class="d-none" id="parentLoadedAssets">{{ json_encode(Basset::loaded()) }}</div>
+			<div class="d-none" id="parentLoadedAssets">{{ json_encode(basset::loaded()) }}</div>
 			@include('crud::inc.form_save_buttons')
 		  </form>
 	</div>

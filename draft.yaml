@@ -1,0 +1,8 @@
+models:
+  Tag:
+    id
+    name: string
+    slug: string
+    timestamps
+    relationships:
+      BelongsToMany: \App\Models\Product

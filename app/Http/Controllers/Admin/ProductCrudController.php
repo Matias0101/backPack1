@@ -135,7 +135,18 @@ class ProductCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ProductRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        //CRUD::setFromDb(); // set fields from db columns.
+        CRUD::field('name');
+    CRUD::field('price');
+    CRUD::field('description');
+    
+    // Agrega el campo select para la categoría
+    CRUD::field('category_id')->type('select')
+        ->label('Category')
+        ->entity('category')  // Nombre del método en el modelo Product que define la relación
+        ->model(Category::class)  // El modelo que contiene las categorías
+        ->attribute('name')  // El atributo del modelo Category que se mostrará en el select
+        ->default(1);  // Opcional: establece una categoría por defecto
 
         /**
          * Fields can be defined using the fluent syntax:

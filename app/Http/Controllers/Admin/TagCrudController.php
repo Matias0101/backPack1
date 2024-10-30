@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\TagRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use \Backpack\ActivityLog\Http\Controllers\Operations\ModelActivityOperation;
+use \Backpack\ActivityLog\Http\Controllers\Operations\EntryActivityOperation;
 
 /**
  * Class TagCrudController
@@ -18,6 +20,8 @@ class TagCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use ModelActivityOperation;  // Muestra los logs de todas las actividades del modelo
+    use EntryActivityOperation;  // Muestra los logs de una entrada específica
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.

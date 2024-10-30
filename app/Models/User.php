@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use App\Models\Traits\LogsActivity;
+
+
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    //use CrudTrait;
     use CrudTrait;
+    use HasRoles;
     use HasFactory, Notifiable;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.

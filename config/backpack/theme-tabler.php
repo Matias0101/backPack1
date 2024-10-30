@@ -22,7 +22,8 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'vertical_dark',
+     'layout' => 'vertical_dark',
+    //'layout' => 'custom-layout',
 
     /**
      * Pick a login page layout.
@@ -147,7 +148,7 @@ return [
          * Change background color with bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info,
          * bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white.
          */
-        'footer' => null,
+        'footer' => null, //queda fijo abajo
 
         /**
          * Use this to pass classes to the table displayed in List Operation

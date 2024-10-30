@@ -16,12 +16,23 @@ Route::group([
     ),
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-    Route::crud('category', 'CategoryCrudController');
-    Route::crud('product', 'ProductCrudController');
-    Route::crud('user', 'UserCrudController');
-    Route::crud('tag', 'TagCrudController');
-}); // this should be the absolute last line of this file
 
-/**
- * DO NOT ADD ANYTHING HERE.
- */
+    // Ruta para Categorías - Solo accesible si el usuario tiene el permiso 'manage categories'
+    Route::group(['middleware' => ['can:manage categories']], function () {
+        Route::crud('category', 'CategoryCrudController');
+    });
+    // Rutas de productos con el middleware de permisos
+    Route::group(['middleware' => ['can:manage products']], function () {
+        Route::crud('product', 'ProductCrudController');
+    });
+
+    // Rutas de usuarios con el middleware de permisos
+    Route::group(['middleware' => ['can:manage users']], function () {
+        Route::crud('user', 'UserCrudController');
+    });
+
+    // Rutas de tags con el middleware de permisos
+    Route::group(['middleware' => ['can:manage tags']], function () {
+        Route::crud('tag', 'TagCrudController');
+    });
+});

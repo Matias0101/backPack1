@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CategoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use \Backpack\ActivityLog\Http\Controllers\Operations\ModelActivityOperation;
+use \Backpack\ActivityLog\Http\Controllers\Operations\EntryActivityOperation;
 
 /**
  * Class CategoryCrudController
@@ -18,6 +20,8 @@ class CategoryCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use ModelActivityOperation;  // Muestra los logs de todas las actividades del modelo
+    use EntryActivityOperation;  // Muestra los logs de una entrada específica
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -28,7 +32,16 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
-        CRUD::setEntityNameStrings('category', 'categories');
+        CRUD::setEntityNameStrings('categorïa', 'categorias');
+        
+        // Verifica si el usuario tiene permiso para gestionar categorías
+        if (!backpack_user()->can('manage categories')) {
+            //abort(403, 'No tienes permiso para gestionar categorías.');
+            CRUD::denyAccess(['list', 'create', 'update', 'delete']);
+        }
+
+
+        
     }
 
     /**
@@ -63,7 +76,7 @@ class CategoryCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('image');
-        
+
 
         /**
          * Fields can be defined using the fluent syntax:

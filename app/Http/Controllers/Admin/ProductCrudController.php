@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use \Backpack\ActivityLog\Http\Controllers\Operations\ModelActivityOperation;
+use \Backpack\ActivityLog\Http\Controllers\Operations\EntryActivityOperation;
 
 /**
  * Class ProductCrudController
@@ -21,6 +23,13 @@ class ProductCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+    // additional operations
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
+
+    use ModelActivityOperation;  // Muestra los logs de todas las actividades del modelo
+    use EntryActivityOperation;  // Muestra los logs de una entrada específica
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -40,6 +49,11 @@ class ProductCrudController extends CrudController
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
+    protected function setupReorderOperation()
+    {
+        $this->crud->set('reorder.label','name');
+        $this->crud->set('reorder.max_level',1);
+    }
     protected function setupListOperation()
     {
         //CRUD::setFromDb(); // set columns from db columns.
